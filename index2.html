@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+
+    <script>
+
+
+class KontoBankowe {
+    constructor(wlasciciel, saldo) {
+        this._wlasciciel = wlasciciel; // Konwencja: _ oznacza, że to jest "prywatne"
+        this._saldo = saldo;
+    }
+
+    get wlasciciel() {
+        console.log("Getter właściciel wywołany!");
+        return this._wlasciciel;
+    }
+
+    set wlasciciel(nowyWlasciciel) {
+        console.log("Setter właściciel wywołany!");
+        if (typeof nowyWlasciciel === 'string' && nowyWlasciciel.length > 0) {
+            this._wlasciciel = nowyWlasciciel;
+        } else {
+            console.error("Nieprawidłowe imię właściciela.");
+        }
+    }
+
+    get saldo() {
+        return this._saldo;
+    }
+
+    set saldo(noweSaldo) {
+        if (typeof noweSaldo === 'number' && noweSaldo >= 0) {
+            this._saldo = noweSaldo;
+        } else {
+            console.error("Nieprawidłowe saldo. Musi być liczbą nieujemną.");
+        }
+    }
+
+    pokazSaldo() {
+        console.log(`Saldo konta ${this._wlasciciel}: ${this._saldo} zł`);
+    }
+
+    wplac(kwota) {
+        if (kwota > 0) {
+            this._saldo += kwota;
+            console.log(`Wpłacono ${kwota} zł. Nowe saldo: ${this._saldo} zł`);
+        } else {
+            console.error("Kwota wpłaty musi być dodatnia.");
+        }
+    }
+}
+
+const mojeKonto2 = new KontoBankowe("Piotr", 2000);
+// console.log(mojeKonto2.wlasciciel); // Użycie gettera
+// mojeKonto2.saldo = 100; // Użycie settera z walidacją
+// mojeKonto2.wplac(500);
+// mojeKonto2.saldo = 3000; // Poprawna zmiana
+// mojeKonto2.pokazSaldo();
+
+// console.log(mojeKonto2.saldo());
+
+
+
+    </script>
+    
+</body>
+</html>
